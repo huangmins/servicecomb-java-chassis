@@ -38,6 +38,12 @@ public class TestQueryParamSchema implements CategorizedTestCase {
   @Override
   public void testAllTransport() throws Exception {
     testQueryParamEncodingPlus();
+    testGetQueryStringNull();
+  }
+
+  private void testGetQueryStringNull() {
+    TestMgr.check(null,
+        restTemplate.getForObject("servicecomb://jaxrs/queryParam/testGetQueryString", String.class));
   }
 
   private void testQueryParamEncodingPlus() {

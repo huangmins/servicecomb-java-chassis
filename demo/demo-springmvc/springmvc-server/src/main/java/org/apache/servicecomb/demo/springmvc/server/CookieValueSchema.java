@@ -15,26 +15,24 @@
  * limitations under the License.
  */
 
-package org.apache.servicecomb.demo.jaxrs.server;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+package org.apache.servicecomb.demo.springmvc.server;
 
 import org.apache.servicecomb.provider.rest.common.RestSchema;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestSchema(schemaId = "QueryParamSchema")
-@Path("/queryParam")
-public class QueryParamSchema {
-  @Path("testQueryEncode")
-  @GET
-  public String testQueryEncode(@QueryParam("param") String param) {
+@RestSchema(schemaId = "CookieValueSchema")
+@RequestMapping(path = "/cookie", produces = MediaType.APPLICATION_JSON_VALUE)
+public class CookieValueSchema {
+  @GetMapping(path = "/testCookieDefaultValueInt")
+  public int testCookieDefaultValueInt(@CookieValue(name = "param", defaultValue = "100") int param) {
     return param;
   }
 
-  @Path("testGetQueryString")
-  @GET
-  public String testGetQueryString(@QueryParam("param") String param) {
+  @GetMapping(path = "/testCookieDefaultValueString")
+  public String testCookieDefaultValueString(@CookieValue(name = "param", defaultValue = "foo") String param) {
     return param;
   }
 }
